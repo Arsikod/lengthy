@@ -2,6 +2,10 @@ import { FormEvent, useState } from 'react';
 import './App.css';
 import Result from './Result';
 
+interface FormElements extends HTMLFormControlsCollection {
+  emailLength: HTMLInputElement;
+}
+
 function App() {
   const [length, setLength] = useState(0);
 
@@ -23,8 +27,8 @@ function App() {
         <form
           onSubmit={(e: FormEvent<HTMLFormElement>) => {
             e.preventDefault();
-            const form = e.target as HTMLFormElement;
-            setLength(parseInt(form.elements.emailLength.value));
+            const elements = e.currentTarget.elements as FormElements;
+            setLength(parseInt(elements.emailLength.value));
           }}
         >
           <label>
